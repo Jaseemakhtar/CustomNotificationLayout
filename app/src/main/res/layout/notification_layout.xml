@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="256dp">
+    <LinearLayout
+        android:id="@+id/top_panel"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/img_profile"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_face"
+            android:layout_width="90dp"
+            android:layout_height="90dp" />
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_intent"
+                android:layout_margin="6dp"
+                android:drawableStart="@drawable/ic_business_center"
+                android:drawablePadding="6dp"
+                android:text="@string/call_intent_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_caller_name"
+                android:layout_margin="6dp"
+                android:text="@string/name"
+                android:textStyle="bold"
+                android:textColor="#444444"
+                android:textSize="30sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/bottom_panel"
+        android:gravity="center"
+        android:layout_below="@id/top_panel"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/btn_reply"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:text="@string/decline_amp_text"
+            android:drawableTop="@drawable/ic_reply"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/btn_reminder"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:text="@string/remind_later"
+            android:drawableTop="@drawable/ic_reminder"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/btn_decline"
+            android:scaleType="fitXY"
+            android:padding="10dp"
+            android:src="@drawable/ic_call_end"
+            android:background="@drawable/red_bg"
+            android:layout_margin="10dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+        <ImageView
+            android:id="@+id/btn_answer"
+            android:scaleType="fitXY"
+            android:padding="10dp"
+            android:src="@drawable/ic_call"
+            android:background="@drawable/green_bg"
+            android:layout_margin="10dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+
+    </LinearLayout>
+</RelativeLayout>

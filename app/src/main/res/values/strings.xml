@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">CustomNotification</string>
+    <string name="decline_amp_text"><![CDATA[Decline & Text]]></string>
+    <string name="remind_later">Remind later</string>
+    <string name="call_intent_text">Hey, gotta discuss the new pro</string>
+    <string name="name">Jaseem Akhtar</string>
+    <string name="notify">Std. Notification</string>
+    <string name="channel_description">All calls related stuff.</string>
+    <string name="channel_name">Calls</string>
+    <string name="custom_notification">Custom Notification</string>
+    <string name="relative_layout">Relative layout</string>
+    <string name="constraint_layout">Constraint Layout</string>
+</resources>
