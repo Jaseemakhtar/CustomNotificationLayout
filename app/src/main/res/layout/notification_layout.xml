@@ -56,7 +56,7 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/btn_reply"
+            android:id="@+id/btnReply"
             android:layout_margin="10dp"
             android:textAlignment="center"
             android:text="@string/decline_amp_text"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/btn_reminder"
+            android:id="@+id/btnReminder"
             android:layout_margin="10dp"
             android:textAlignment="center"
             android:text="@string/remind_later"
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content" />
 
         <ImageView
-            android:id="@+id/btn_decline"
+            android:id="@+id/btnDecline"
             android:scaleType="fitXY"
             android:padding="10dp"
             android:src="@drawable/ic_call_end"
@@ -84,7 +84,7 @@
             android:layout_height="60dp" />
 
         <ImageView
-            android:id="@+id/btn_answer"
+            android:id="@+id/btnAnswer"
             android:scaleType="fitXY"
             android:padding="10dp"
             android:src="@drawable/ic_call"
