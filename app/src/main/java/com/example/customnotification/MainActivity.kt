@@ -17,6 +17,10 @@ class MainActivity : AppCompatActivity() {
         const val CHANNEL_ID = "calls"
         const val NOTIFICATION_ID_C = 483
         const val NOTIFICATION_ID_STD = 482
+        const val ACTION_ANSWER = "com.example.customnotification.action.ANSWER"
+        const val ACTION_DECLINE = "com.example.customnotification.action.DECLINE"
+        const val ACTION_DECLINE_N_TEXT = "com.example.customnotification.action.DECLINE_TEXT"
+        const val ACTION_REMIND_LATER = "com.example.customnotification.action.REMIND_LATER"
     }
     private lateinit var notificationManager: NotificationManagerCompat
     private lateinit var remoteViews: RemoteViews
@@ -42,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
         btnCustomNotification.setOnClickListener {
             notificationTime = System.currentTimeMillis()
-            startService(Intent(this@MainActivity, MyIntentService::class.java))
+            /*startService(Intent(this@MainActivity, MyIntentService::class.java))*/
             getCustomNotification()
         }
     }
@@ -74,7 +78,6 @@ class MainActivity : AppCompatActivity() {
             .setStyle(NotificationCompat.BigTextStyle()
                 .bigText("Much longer text that cannot fit one line..."))
             .setPriority(NotificationCompat.PRIORITY_MAX)
-            .setAutoCancel(true)
             .setWhen(notificationTime)
         createNotificationChannel()
 
@@ -84,22 +87,21 @@ class MainActivity : AppCompatActivity() {
 
     fun getCustomNotification(){
 
-        val callAnswer = Intent(this, MyIntentService::class.java)
+        val callAnswer = Intent(this, MyBroadcastReceiver::class.java)
         callAnswer.action = ACTION_ANSWER
-        remoteViews.setOnClickPendingIntent(R.id.btnAnswer, PendingIntent.getService(this, 0, callAnswer, PendingIntent.FLAG_UPDATE_CURRENT))
+        remoteViews.setOnClickPendingIntent(R.id.btnAnswer, PendingIntent.getBroadcast(this, 0, callAnswer, 0))
 
-        val callDecline = Intent(this, MyIntentService::class.java)
+        val callDecline = Intent(this, MyBroadcastReceiver::class.java)
         callDecline.action = ACTION_DECLINE
-        remoteViews.setOnClickPendingIntent(R.id.btnDecline, PendingIntent.getService(this, 0, callDecline, PendingIntent.FLAG_UPDATE_CURRENT))
+        remoteViews.setOnClickPendingIntent(R.id.btnDecline, PendingIntent.getBroadcast(this, 0, callDecline, PendingIntent.FLAG_UPDATE_CURRENT))
 
-        val callText = Intent(this, MyIntentService::class.java)
+        val callText = Intent(this, MyBroadcastReceiver::class.java)
         callText.action = ACTION_DECLINE_N_TEXT
-        remoteViews.setOnClickPendingIntent(R.id.btnReply, PendingIntent.getService(this, 0, callText, PendingIntent.FLAG_UPDATE_CURRENT))
+        remoteViews.setOnClickPendingIntent(R.id.btnReply, PendingIntent.getBroadcast(this, 0, callText, PendingIntent.FLAG_UPDATE_CURRENT))
 
-        val callRemind = Intent(this, MyIntentService::class.java)
+        val callRemind = Intent(this, MyBroadcastReceiver::class.java)
         callRemind.action = ACTION_REMIND_LATER
-        remoteViews.setOnClickPendingIntent(R.id.btnReminder, PendingIntent.getService(this, 0, callRemind, PendingIntent.FLAG_UPDATE_CURRENT))
-
+        remoteViews.setOnClickPendingIntent(R.id.btnReminder, PendingIntent.getBroadcast(this, 0, callRemind, PendingIntent.FLAG_UPDATE_CURRENT))
 
         val customNotification = NotificationCompat.Builder(this@MainActivity, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_background)

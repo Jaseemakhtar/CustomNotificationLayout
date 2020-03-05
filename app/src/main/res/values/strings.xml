@@ -8,6 +8,6 @@
     <string name="channel_description">All calls related stuff.</string>
     <string name="channel_name">Calls</string>
     <string name="custom_notification">Custom Notification</string>
-    <string name="relative_layout">Relative layout</string>
+    <string name="relative_layout">Relative Layout</string>
     <string name="constraint_layout">Constraint Layout</string>
 </resources>
