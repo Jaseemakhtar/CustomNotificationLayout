@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
+import android.graphics.*
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     }
     private lateinit var notificationManager: NotificationManagerCompat
     private lateinit var remoteViews: RemoteViews
+    private lateinit var collapsedView: RemoteViews
     private var notificationTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,22 +33,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         notificationManager = NotificationManagerCompat.from(applicationContext)
         remoteViews = RemoteViews(packageName, R.layout.notification_layout)
-        toggleLayouts.setOnCheckedChangeListener { buttonView, isChecked ->
-            remoteViews = if(isChecked){
-                toggleLayouts.text = getString(R.string.constraint_layout)
-                RemoteViews(packageName, R.layout.notification_layout_cl)
-            }else{
-                toggleLayouts.text = getString(R.string.relative_layout)
-                RemoteViews(packageName, R.layout.notification_layout)
-            }
-        }
+        collapsedView = RemoteViews(packageName, R.layout.notification_layout_collapsed)
+
         btnStdNotification.setOnClickListener {
             notificationTime = System.currentTimeMillis()
             getNotification()
         }
         btnCustomNotification.setOnClickListener {
             notificationTime = System.currentTimeMillis()
-            /*startService(Intent(this@MainActivity, MyIntentService::class.java))*/
             getCustomNotification()
         }
     }
@@ -103,13 +97,35 @@ class MainActivity : AppCompatActivity() {
         callRemind.action = ACTION_REMIND_LATER
         remoteViews.setOnClickPendingIntent(R.id.btnReminder, PendingIntent.getBroadcast(this, 0, callRemind, PendingIntent.FLAG_UPDATE_CURRENT))
 
+        val b = textAsBitmap("Jaseem akhtar", 30f, Color.BLACK)
+        collapsedView.setImageViewBitmap(R.id.tv_caller_name, b)
+
         val customNotification = NotificationCompat.Builder(this@MainActivity, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-            .setCustomContentView(remoteViews)
+            .setCustomContentView(collapsedView)
+            .setCustomHeadsUpContentView(collapsedView)
+            .setCustomBigContentView(remoteViews)
             .setAutoCancel(true)
             .setWhen(notificationTime)
         createNotificationChannel()
         notificationManager.notify(NOTIFICATION_ID_C, customNotification.build())
+    }
+
+    private fun textAsBitmap(text: String, textSize: Float, textColor: Int): Bitmap{
+        val fontName= "poppins_regular"
+        val font= Typeface.createFromAsset(assets,String.format("font/%s.ttf",fontName));
+        val paint = Paint();
+        paint.setTextSize(textSize);
+        paint.setTypeface(font);
+        paint.setColor(textColor);
+        paint.setTextAlign(Paint.Align.LEFT);
+        val baseline=-paint.ascent(); // ascent() is negative
+        val width = (paint.measureText(text)+0.5f); // round
+        val height = (baseline+paint.descent()+0.5f);
+        val image= Bitmap.createBitmap(width.toInt(), height.toInt(),Bitmap.Config.ARGB_8888);
+        val canvas = Canvas(image);
+        canvas.drawText(text,0f,baseline,paint);
+        return image
     }
 }

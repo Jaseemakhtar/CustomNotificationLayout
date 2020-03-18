@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="256dp">
+    android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/top_panel"
         android:layout_alignParentTop="true"
@@ -64,14 +64,19 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/btnReminder"
-            android:layout_margin="10dp"
-            android:textAlignment="center"
-            android:text="@string/remind_later"
-            android:drawableTop="@drawable/ic_reminder"
+        <ViewFlipper
             android:layout_width="100dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/btnReminder"
+                android:textAlignment="center"
+                android:text="@string/remind_later"
+                android:drawableTop="@drawable/ic_reminder"
+                android:layout_margin="10dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
+        </ViewFlipper>
 
         <ImageView
             android:id="@+id/btnDecline"

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_panel"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/img_profile"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_face"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/tv_caller_name"
+        android:layout_margin="6dp"
+        android:textStyle="bold"
+        android:textColor="#444444"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/btnDecline"
+        android:scaleType="fitXY"
+        android:padding="10dp"
+        android:src="@drawable/ic_call_end"
+        android:background="@drawable/red_bg"
+        android:layout_margin="10dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+
+    <ImageView
+        android:id="@+id/btnAnswer"
+        android:scaleType="fitXY"
+        android:padding="10dp"
+        android:src="@drawable/ic_call"
+        android:background="@drawable/green_bg"
+        android:layout_margin="10dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+
+</LinearLayout>
