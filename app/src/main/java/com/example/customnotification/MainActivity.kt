@@ -1,6 +1,7 @@
 package com.example.customnotification
 
 import android.app.NotificationChannel
+import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
@@ -60,11 +61,17 @@ class MainActivity : AppCompatActivity() {
                 setSound(null, null)
                 description = descriptionText
             })
+            notificationManager.createNotificationChannelGroup(
+                NotificationChannelGroup(
+                    "calls",
+                    "Alerrts"
+                )
+            )
         }
     }
 
 
-    fun getNotification(){
+    private fun getNotification(){
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentTitle("My notification")
@@ -79,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getCustomNotification(){
+    private fun getCustomNotification(){
 
         val callAnswer = Intent(this, MyBroadcastReceiver::class.java)
         callAnswer.action = ACTION_ANSWER
@@ -102,12 +109,16 @@ class MainActivity : AppCompatActivity() {
 
         val customNotification = NotificationCompat.Builder(this@MainActivity, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_background)
-            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-            .setCustomContentView(collapsedView)
-            .setCustomHeadsUpContentView(collapsedView)
+//            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+            .setCustomContentView(remoteViews)
+            .setCustomHeadsUpContentView(remoteViews)
+            .setCategory(NotificationCompat.CATEGORY_CALL)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
             .setCustomBigContentView(remoteViews)
-            .setAutoCancel(true)
-            .setWhen(notificationTime)
+            .setContentTitle("Title")
+            .setAutoCancel(false)
+            .setOngoing(true)
+//            .setWhen(notificationTime)
         createNotificationChannel()
         notificationManager.notify(NOTIFICATION_ID_C, customNotification.build())
     }
